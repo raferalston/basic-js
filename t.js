@@ -1,42 +1,25 @@
-
-
- class DepthCalculator {
-    constructor() {
-        this.depth = 1
+function repeater(s, options) {
+    if (!options.separator) {
+        options.separator = '+'
     }
-    calculateDepth(arr) {
-        let tmp = []
-        let flat = false
-  
-        for (let i = 0; i < arr.length; i++) {
-            let el = arr[i]
-            if (Array.isArray(el)) {
-              if (!flat) {
-                this.depth++
-                flat = true
-              }
-              tmp.push(...el)
-            }
-        }
-        if (!flat) {
-            let res = this.depth
-            console.log(res);
-            this.depth = 1
-            return res
-        } else {
-            return this.calculateDepth(tmp)
-        }
+    if (!options.additionSeparator) {
+        options.additionSeparator = '|'
     }
-  }
+    if (options.addition !== undefined) {
+        options.addition = options.additionRepeatTimes ? 
+        options.additionSeparator ? `${options.addition}${options.additionSeparator}`.repeat(options.additionRepeatTimes).slice(0, -options.additionSeparator.length) 
+        : options.addition.repeat(options.additionRepeatTimes) 
+        : options.addition
+    }
+    if (options.repeatTimes !== undefined) {
+        s = options.addition ? `${s}${options.addition}${options.separator}`.repeat(options.repeatTimes).slice(0, -options.separator.length) : `${s}${options.separator}`.repeat(options.repeatTimes).slice(0, -options.separator.length) 
+    } else {
+        s = options.addition ? `${s}${options.addition}${options.separator}`.slice(0, -options.separator.length) : `${s}${options.separator}`.slice(0, -options.separator.length) 
+    }
+    console.log(s);
+    return s
+}
 
-const depthCalc = new DepthCalculator();
-depthCalc.calculateDepth([1, 2, 3, 4, 5, [1]]) // 2);
-depthCalc.calculateDepth([1, 2, 3, [1], 4, 5, [1]]) // 2);
-// depthCalc.calculateDepth([1, 2, 3, [8, [2]], 4, 5, []]) // 3);
-// depthCalc.calculateDepth([1, [8, [[]]], 2, 3, [8, []], 4, 5, []]) // , 4);
-// depthCalc.calculateDepth([1, [8, [[]]], 2, 3, [8, []], 4, 5, ['6575', ['adas', ['dfg', [0]]]]]) //, 5);
-// depthCalc.calculateDepth([1, [8, [[]]], 2, 3, [8, [[[[[[[[[[[[[]]]]]]]]]]]]]], 4, 5, ['6575', ['adas', ['dfg', [0]]]]]) // , 15);
-// depthCalc.calculateDepth([1, [8, [[]]], 2, 3, [8, [[[[[[[[[[[[[]]]]]]]]]]]]]], [8, [[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]], 4, 5, ['6575', ['adas', ['dfg', [0]]]]]) // , 25);
-// depthCalc.calculateDepth([1, [8, [[]]], [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]], []]]], []]]]]]]]], []]]], []]]]]]]]]], 2, 3, [8, [[[[[[[[[[[[[[]]]]]]]]]]]]]]], [8, [[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]], 4, 5, ['6575', ['adas', ['dfg', [0]]]]]) //, 31);
-
-
+// repeater('TESTstr', { separator: 'ds', addition: 'ADD!', additionSeparator: ')))000' })
+repeater(true, { repeatTimes: 3, separator: '??? ', addition: false, additionRepeatTimes: 2, additionSeparator: '!!!' }) 
+//, 'truefalse!!!false??? truefalse!!!false??? truefalse!!!false');
