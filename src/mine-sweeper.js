@@ -23,11 +23,89 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+ function minesweeper(m) {
+  r = []
+  for (let i = 0; i < m.length; i++) {
+      let tmp = []
+      for (let j = 0; j < m[i].length; j++) {
+          if (m[i][j]) {
+              tmp.push(1)
+          } else {
+              tmp.push(0)
+          }
+      }
+      r.push(tmp)
+  } 
+  for (let i = 0; i < m.length; i++) {
+      for (let j = 0; j < m[i].length; j++) {
+          if (m[i][j]) {
+              try {
+                  if (r[i][j+1] !== undefined && !m[i][j+1]) {
+                      r[i][j+1]++
+                  } 
+              } catch {
 
+              }
+              try {
+                  if (r[i][j-1] !== undefined && !m[i][j-1]) {
+                      r[i][j-1]++
+                  } 
+              } catch {
+                  
+              }
+              try {
+                  if (r[i+1][j] !== undefined && !m[i+1][j]) {
+                      r[i+1][j]++
+
+                  } 
+              } catch {
+
+              }
+              try {
+
+                  if (r[i-1][j] !== undefined && !m[i-1][j]) {
+                      r[i-1][j]++
+                  }
+              } catch {
+
+              }
+              try {
+
+                  if (r[i-1][j-1] !== undefined && !m[i-1][j-1]) {
+                      r[i-1][j-1]++
+                  }
+              } catch {
+
+              }
+              try {
+
+                  if (r[i+1][j+1] !== undefined && !m[i+1][j+1]) {
+                      r[i+1][j+1]++
+                  }
+              } catch {
+
+              }
+              try {
+
+                  if (r[i+1][j-1] !== undefined && !m[i+1][j-1]) {
+                      r[i+1][j-1]++
+                  }
+              } catch {
+
+              }
+              try {
+
+                  if (r[i-1][j+1] !== undefined && !m[i-1][j+1]) {
+                      r[i-1][j+1]++
+                  }
+              } catch {
+
+              }
+          }
+      }
+  } 
+  return r;
+}
 module.exports = {
   minesweeper
 };

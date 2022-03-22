@@ -1,25 +1,16 @@
-function repeater(s, options) {
-    if (!options.separator) {
-        options.separator = '+'
+// * For 100, the result should be 1 (1 + 0 + 0 = 1)
+// * For 91, the result should be 1 (9 + 1 = 10, 1 + 0 = 1)
+// *
+// */
+
+function getSumOfDigits(n) {
+    n = String(n)
+    n = n.split('')
+    s = 0
+    for (let i = 0; i < n.length; i++) {
+        s += +n[i]
     }
-    if (!options.additionSeparator) {
-        options.additionSeparator = '|'
-    }
-    if (options.addition !== undefined) {
-        options.addition = options.additionRepeatTimes ? 
-        options.additionSeparator ? `${options.addition}${options.additionSeparator}`.repeat(options.additionRepeatTimes).slice(0, -options.additionSeparator.length) 
-        : options.addition.repeat(options.additionRepeatTimes) 
-        : options.addition
-    }
-    if (options.repeatTimes !== undefined) {
-        s = options.addition ? `${s}${options.addition}${options.separator}`.repeat(options.repeatTimes).slice(0, -options.separator.length) : `${s}${options.separator}`.repeat(options.repeatTimes).slice(0, -options.separator.length) 
-    } else {
-        s = options.addition ? `${s}${options.addition}${options.separator}`.slice(0, -options.separator.length) : `${s}${options.separator}`.slice(0, -options.separator.length) 
-    }
-    console.log(s);
     return s
 }
 
-// repeater('TESTstr', { separator: 'ds', addition: 'ADD!', additionSeparator: ')))000' })
-repeater(true, { repeatTimes: 3, separator: '??? ', addition: false, additionRepeatTimes: 2, additionSeparator: '!!!' }) 
-//, 'truefalse!!!false??? truefalse!!!false??? truefalse!!!false');
+getSumOfDigits(91)
